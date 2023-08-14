@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %} {% block titulo %}
+<title>Atividades</title>
+{% endblock %} {% block conteudo %}
+<h3>Atividades ({{ object_list.count }})</h3>
+<p class="d-flex flex-row-reverse">
+    <a href="{% url 'cadastrar-atividade' %}" class="btn btn-primary btn-sm">Cadastrar Atividade</a>
+</p>
+<p class="lead">Lista de Atividades registradas</p>
+<hr />
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <tr>
+            <th>Número</th>
+            <th>Descrição</th>
+            <th>Opções</th>
+        </tr>
+        {% for obj in object_list %}
+            <tr>                
+                <td><strong>{{ obj.numero }}</strong></td>
+                <td>{{ obj.descricao }}</td>
+                <td>
+                    <a title="Editar" href="{% url 'atualizar-atividade' obj.pk %}" class="btn btn-warning btn-sm">E</a>
+                    <a title="Excluir" href="{% url 'excluir-atividade' obj.pk %}" class="btn btn-danger btn-sm">X</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">
+                    Não há registros
+                </td>
+            </tr>
+        {% endfor %}
+        
+    </table>
+</div>
+
+{% endblock %}

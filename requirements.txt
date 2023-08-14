@@ -1,6 +1,7 @@
 asgiref==3.7.2
 astroid==2.15.6
 autopep8==2.0.2
+crispy-bootstrap5==0.7
 dill==0.3.7
 Django==4.2.4
 django-braces==1.15.0
