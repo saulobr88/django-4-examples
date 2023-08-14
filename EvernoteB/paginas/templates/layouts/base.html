@@ -12,11 +12,54 @@
 <body>
     
     {% block menu %}
-    <div class="bg-light">
-        <a href="{% url 'index' %}">Início</a> | 
-        <a href="{% url 'listar-campos' %}">Campos</a> | 
-        <a href="{% url 'listar-atividades' %}">Atividades</a> | 
-        <a href="{% url 'sobre' %}">Sobre</a>
+    <div>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'index' %}">Início</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'listar-campos' %}">Campos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'listar-atividades' %}">Atividades</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+                  </li>
+                </ul>
+                <div class="d-flex">
+                    <ul class="navbar-nav me-auto">
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                             {{ request.user }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Alterar senha</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'logout' %}">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            Sair</a>
+                        </li>
+                        {% endif %}
+                        {% if not request.user.is_authenticated %}
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'login' %}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                            Entrar</a>
+                        </li>
+                        {% endif %}
+                      </ul>
+                </div>
+              </div>
+            </div>
+        </nav>
     </div>
     {% endblock %}
 
