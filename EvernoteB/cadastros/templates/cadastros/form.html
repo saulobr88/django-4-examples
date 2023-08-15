@@ -34,7 +34,36 @@
 <script src="{% static 'js/jquery.mask.min.js' %}"></script>
 
 <script>
+    function formatDate(inputDate) {
+        if (!inputDate || inputDate.trim() === "") {
+            return ""; // Retorna uma string vazia se inputDate for vazio ou nulo
+        }
+    
+        const parts = inputDate.split("/");
+    
+        if (parts.length !== 3) {
+            return ""; // Retorna uma string vazia se a entrada não estiver no formato esperado
+        }
+    
+        const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+    
+        return formattedDate;
+    }
+
     $(document).ready(function(){
+
+        const data_inicial = document.querySelector('#id_data_inicial');
+        if (data_inicial && data_inicial.type === 'text') {
+            const current_value = formatDate(data_inicial.value);
+            data_inicial.type = 'date';
+            data_inicial.value = current_value;
+        }
+        const data_final = document.querySelector('#id_data_final');
+        if (data_final && data_final.type === 'text') {
+            const current_value = formatDate(data_final.value);
+            data_final.type = 'date';
+            data_final.value = current_value;
+        }
 
         $("#id_cpf").mask("000.000.000-00");
         var SPMaskBehavior = function (val) {
